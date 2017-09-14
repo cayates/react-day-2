@@ -1,0 +1,102 @@
+React Day 1
+
+Class = Plane (highest hierarchy)
+- You can extend on classes 
+
+Breaks down to two types of planes 
+- Jets 
+- Props 
+
+Jets: 
+- Military
+- Passenger/commercial
+
+Props
+- Personal
+- Cargo 
+
+----------------------------------------
+Bubba's code
+----------------------------------------
+
+// arrow function helps allow you to NOT LOSE SCOPE
+// af + Enter creates an arrow function for you as shorthand 
+
+class Plane(){
+    constructor(planeInfo = {}){ <----- the object brackets default if nothing is passed (use every time as a fail safe)
+        this.length = planeInfo.length;
+        this.weight = planeInfo.weight;
+        this.capacity = planeInfo.capacity;
+        this.name = planeInfo.name;
+        this.make = planeInfo.make;
+        this.acceleration = planeInfo.acceleration;
+        this.topSpeed = planeInfo.topSpeed;
+        this.currentSpeed = 0;
+        this.fly = () => {
+            const flying = setInterval(() => {
+                if(this.topSpeed !== this.currentSpeed){
+                    this.currentSpeed += 10;
+                }   else {
+                    clearInterval(flying);
+                }
+            }, this.accel)
+        }
+    }
+}
+
+// extends means that this class is a part of the parent class 
+
+class Jet extends Plane {
+    constructor(jetOptions){
+        super(jetOptions.planeOptions) <------ super UNLOCKS this in a sub class <--- super points to the IMMEDIATE parent
+        this.type = jetOptions.type;
+        this.jetEngineMake = jetOptions.jetEngineMake;
+    }
+}
+
+// calling a variable
+
+const f15 = new Jet({
+    type: "military",
+    jetEngineMake: 'Rolls Royce',
+    planeOptions: {
+        length: '60ft',
+        weight: '100 tons',
+        capacity: 2,
+        name: 'f15 hornet',
+        make: 'Lockheed Martin',
+        accel: 10,
+        topSpeed: 800
+    }
+})
+console.log(f15);
+
+// map and filter demos 
+
+map: array method, takes in cb function, executes to the length of the array 
+- creates a new copy of the array (in case we want the original array in tact)
+
+filter: takes the array and filters it down to a new array 
+- if you wanted only females, males, etc.
+
+
+// MAP EXAMPLE
+
+const simplifiedUsers = usersData.map((user, index, array) => { <------ always gets these three parameters (first parameter will always be what you are iterating over) 
+    return {
+        name: user.name.first, 
+        email: user.email, 
+        password: user.login.password <---- need to point SPECIFICALLY to the password, which is inside user.login
+    }
+})
+
+// FILTER EXAMPLE
+// filter MUST return a boolean value (true or false)
+
+const justFemales = usersData.filter((user, index) => {
+    if (user.gender === 'female'){
+        return true;
+    } else {
+        return false;
+    }
+}) 
