@@ -24,10 +24,10 @@ class Factory {
         this.abs = true;
         this.warranty = "60,000 miles / 3 years"
         this.massBuild = (quantity, options) =>{
-            console.log("Building " + quantity + " " + options.color + " " + options.trim + " " + options.model + "'s.")
+            console.log("Building " + quantity + " " + this.color + " " + this.trim + " " + this.model + "'s.")
         }
         this.customerBuild = (color, options) => {
-            console.log("Building one " + options.color + " " + options.trim + " " + options.model + " with the following options: " + options.extras)
+            console.log("Building one " + color + " " + this.trim + " " + this.model + " with the following options: " + options.extras)
         }
     }
 }
@@ -134,7 +134,11 @@ console.log(mazda3car);
 // It should print: "Building 35000 Red Touring Mazda3's."
 // Write your code below:
 
-console.log(mazda3car.massBuild(35000, {color: mazda3car.color, trim: mazda3car.trim, model: mazda3car.model}));
+mazda3car.massBuild(35000, {
+    color: mazda3car.color, 
+    trim: mazda3car.trim, 
+    model: mazda3car.model
+});
 
 
 
@@ -142,11 +146,11 @@ console.log(mazda3car.massBuild(35000, {color: mazda3car.color, trim: mazda3car.
 // It should read: "Building one yellow Touring Mazda3 with the following options: weather package, satellite radio, rear spoiler"
 // Write your code below:
 
-console.log(mazda3car.customerBuild(mazda3car.color,{
+mazda3car.customerBuild(mazda3car.color,{
     trim: mazda3car.trim,
     model: mazda3car.model,
     extras: "weather package, satellite radio, rear spoiler."
-}))
+})
 
 
 // MIATA-RF MASS PRODUCTION
@@ -180,7 +184,7 @@ console.log(miataCar);
 // It should print: "Building 15000 Red Grand Touring Miata-RF's."
 // Write your code below:
 
-console.log(miataCar.massBuild(15000, {color: miataCar.color, trim: miataCar.trim, model: miataCar.model}));
+miataCar.massBuild(15000, {color: miataCar.color, trim: miataCar.trim, model: miataCar.model});
 
 
 
@@ -188,11 +192,18 @@ console.log(miataCar.massBuild(15000, {color: miataCar.color, trim: miataCar.tri
 // It should read: "Building one black Grand Touring Miata-RF with the following options: hid headlights, sports suspension, leather steering wheel, heated seats, adaptive cruise control"
 // Write your code below:
 
-console.log(miataCar.customerBuild(miataCar.color, {
+miataCar.customerBuild(miataCar.color, {
     trim: miataCar.trim,
     model: miataCar.model,
     extras: "hid headlights, sports suspension, leather steering wheel, heated seats, adaptive cruise control."
-}))
+})
+
+// console.log(trailBlazerTruck.customerBuild(trailBlazerTruck.color, {
+//     trim: "Sport",
+//     color: trailBlazerTruck.color,
+//     model: trailBlazerTruck.model,
+//     extras: "seat warmers, tinted windows, fog lamps."
+// }))
 
 // TRAIL BLAZER MASS PRODUCTION
 // The Trail Blazer should inherit from truck.
@@ -223,19 +234,19 @@ console.log(trailBlazerTruck)
 // It should print: "Building 35000 blue Sport Trail Blazer's."
 // Wrint your code below:
 
-console.log(trailBlazerTruck.massBuild(35000,{ 
+trailBlazerTruck.massBuild(35000,{ 
     color: trailBlazerTruck.color, 
     trim: trailBlazerTruck.trim, 
     model: trailBlazerTruck.model
-}))
+})
 
 // Print trailBlazer, calling customerBuild(). It should build a red Trail Blazer with the following options, as an array: seat warmers, tinted windows, fog lamps.
 // It should print: "Building one red Sport Trail Blazer with the following options: seat warmers, tinted windows, fog lamps"
 // Write your code below:
 
-console.log(trailBlazerTruck.customerBuild(trailBlazerTruck.color, {
+trailBlazerTruck.customerBuild(trailBlazerTruck.color, {
     trim: "Sport",
     color: trailBlazerTruck.color,
     model: trailBlazerTruck.model,
     extras: "seat warmers, tinted windows, fog lamps."
-}))
+})
