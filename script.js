@@ -27,7 +27,7 @@ class Factory {
             console.log("Building " + quantity + " " + options.color + " " + options.trim + " " + options.model + "'s.")
         }
         this.customerBuild = (color, options) => {
-            console.log("Building one " + color + " " + options.trim + " " + options.model + " with the following options" + options.extras)
+            console.log("Building one " + options.color + " " + options.trim + " " + options.model + " with the following options: " + options.extras)
         }
     }
 }
@@ -43,7 +43,7 @@ class Car extends Factory{
     constructor(carInfo = {}){
         super(carInfo.factoryInfo)
         this.model = carInfo.model,
-        this.doors = carInfo.doors,
+        this.doors = 4,
         this.color = carInfo.color,
         this.enginetype = carInfo.enginetype,
         this.transmission = carInfo.transmission,
@@ -59,6 +59,7 @@ class Car extends Factory{
     }
 }
 
+// changing doors to 4 fixes all of cars 
 
 // CREATE A SUB-CLASS CALLED SPORT
 // It should extend from Car.
@@ -95,9 +96,10 @@ class Truck extends Factory {
         this.hitch = truckInfo.hitch,
         this.bed = truckInfo.bed,
         this.navigation = truckInfo.navigation,
-        this.backupcamera = truckInfo.backupcamera,
+        this.backupcamera = true,
         this.audio = "basic",
-        this.warranty = "150,000 miles / 6 years"
+        this.warranty = "150,000 miles / 6 years", 
+        this.trim = "Sport"
     }
 }
 
@@ -115,9 +117,9 @@ const mazda3 = {
     enginetype: "Hybrid",
     transmission: "Automatic",
     trim: "Touring",
-    wheels: "Base",
+    wheelstrim: "Base",
     audio: "Premium",
-    seats: "Leather",
+    seatstrim: "Leather",
     moonroof: true
 }
 
@@ -128,14 +130,11 @@ const mazda3car = new Car(mazda3);
 
 console.log(mazda3car);
 
-//need to check: doors, seatstrim, wheelstrim
-
-
-
 // Print calling massBuild(), building 35000 cars.
 // It should print: "Building 35000 Red Touring Mazda3's."
 // Write your code below:
 
+console.log(mazda3car.massBuild(35000, {color: mazda3car.color, trim: mazda3car.trim, model: mazda3car.model}));
 
 
 
@@ -143,8 +142,11 @@ console.log(mazda3car);
 // It should read: "Building one yellow Touring Mazda3 with the following options: weather package, satellite radio, rear spoiler"
 // Write your code below:
 
-
-
+console.log(mazda3car.customerBuild(mazda3car.color,{
+    trim: mazda3car.trim,
+    model: mazda3car.model,
+    extras: "weather package, satellite radio, rear spoiler."
+}))
 
 
 // MIATA-RF MASS PRODUCTION
@@ -155,33 +157,30 @@ console.log(mazda3car);
 // Write your code below:
 
 const miataRf = {
+    carInfo:{
     model: "Miata-RF",
     trim: "Grand Touring",
     transmission: "Manual",
-    top: "Hard Top",
     color: "Red",
-    seats: "Leather",
+    seatstrim: "Leather",
     audio: "Premium",
-    wheels: "Premium"
+    wheelstrim: "Premium"
+    },
+    top: "Hard Top",
 }
 
-const miataCar = new Sport (miataRf)
+const miataCar = new Sport(miataRf)
 
 // Print miataRf. It should have all of the above properties. Plus, the extended warranty.
 // Write your code below:
 
 console.log(miataCar);
 
-// need to check: audio, color, model, seatstrim, transmission, trim, wheelstrim
-
-
-
-
 // Print miataRf, calling massBuild(), building 15,000
 // It should print: "Building 15000 Red Grand Touring Miata-RF's."
 // Write your code below:
 
-
+console.log(miataCar.massBuild(15000, {color: miataCar.color, trim: miataCar.trim, model: miataCar.model}));
 
 
 
@@ -189,8 +188,11 @@ console.log(miataCar);
 // It should read: "Building one black Grand Touring Miata-RF with the following options: hid headlights, sports suspension, leather steering wheel, heated seats, adaptive cruise control"
 // Write your code below:
 
-
-
+console.log(miataCar.customerBuild(miataCar.color, {
+    trim: miataCar.trim,
+    model: miataCar.model,
+    extras: "hid headlights, sports suspension, leather steering wheel, heated seats, adaptive cruise control."
+}))
 
 // TRAIL BLAZER MASS PRODUCTION
 // The Trail Blazer should inherit from truck.
@@ -217,15 +219,23 @@ const trailBlazerTruck = new Truck(trailBlazer)
 
 console.log(trailBlazerTruck)
 
-
 // Print trailBlazer, calling massBuid(). It should build 35000 trucks.
 // It should print: "Building 35000 blue Sport Trail Blazer's."
 // Wrint your code below:
 
-
-
-
+console.log(trailBlazerTruck.massBuild(35000,{ 
+    color: trailBlazerTruck.color, 
+    trim: trailBlazerTruck.trim, 
+    model: trailBlazerTruck.model
+}))
 
 // Print trailBlazer, calling customerBuild(). It should build a red Trail Blazer with the following options, as an array: seat warmers, tinted windows, fog lamps.
 // It should print: "Building one red Sport Trail Blazer with the following options: seat warmers, tinted windows, fog lamps"
 // Write your code below:
+
+console.log(trailBlazerTruck.customerBuild(trailBlazerTruck.color, {
+    trim: "Sport",
+    color: trailBlazerTruck.color,
+    model: trailBlazerTruck.model,
+    extras: "seat warmers, tinted windows, fog lamps."
+}))
